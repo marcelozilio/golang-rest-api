@@ -3,7 +3,7 @@ package dao
 import (
 	"log"
 
-	. "github.com/marcelozilio/golang-rest-api/model"
+	. "github.com/marcelozilio/golang-rest-api/tree/master/model"
 	mgo "gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )

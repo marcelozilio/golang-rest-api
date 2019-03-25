@@ -5,8 +5,8 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	. "github.com/marcelozilio/golang-rest-api/config/dao"
-	. "github.com/marcelozilio/golang-rest-api/model"
+	. "github.com/marcelozilio/golang-rest-api/tree/master/config/dao"
+	. "github.com/marcelozilio/golang-rest-api/tree/master/model"
 	"gopkg.in/mgo.v2/bson"
 )
 

@@ -6,9 +6,9 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	. "github.com/marcelozilio/golang-rest-api/config"
-	. "github.com/marcelozilio/golang-rest-api/config/dao"
-	personrouter "github.com/marcelozilio/golang-rest-api/router"
+	. "github.com/marcelozilio/golang-rest-api/tree/master/config"
+	. "github.com/marcelozilio/golang-rest-api/tree/master/config/dao"
+	personrouter "github.com/marcelozilio/golang-rest-api/tree/master/router"
 )
 
 var dao = PersonDAO{}
