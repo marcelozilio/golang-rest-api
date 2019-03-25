@@ -1,12 +1,12 @@
-package movierouter
+package personrouter
 
 import (
 	"encoding/json"
 	"net/http"
 
 	"github.com/gorilla/mux"
-	. "github.com/marcelozilio/golang-rest-api/tree/master/config/dao"
-	. "github.com/marcelozilio/golang-rest-api/tree/master/model"
+	. "github.com/marcelozilio/golang-rest-api/config/dao"
+	. "github.com/marcelozilio/golang-rest-api/model"
 	"gopkg.in/mgo.v2/bson"
 )
 
@@ -24,52 +24,52 @@ func respondWithJson(w http.ResponseWriter, code int, payload interface{}) {
 }
 
 func GetAll(w http.ResponseWriter, r *http.Request) {
-	movies, err := dao.GetAll()
+	persons, err := dao.GetAll()
 	if err != nil {
 		respondWithError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
-	respondWithJson(w, http.StatusOK, movies)
+	respondWithJson(w, http.StatusOK, persons)
 }
 
 func GetByID(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
-	movie, err := dao.GetByID(params["id"])
+	person, err := dao.GetByID(params["id"])
 	if err != nil {
 		respondWithError(w, http.StatusBadRequest, "Invalid Person ID")
 		return
 	}
-	respondWithJson(w, http.StatusOK, movie)
+	respondWithJson(w, http.StatusOK, person)
 }
 
 func Create(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
-	var movie Movie
-	if err := json.NewDecoder(r.Body).Decode(&movie); err != nil {
+	var person Person
+	if err := json.NewDecoder(r.Body).Decode(&person); err != nil {
 		respondWithError(w, http.StatusBadRequest, "Invalid request payload")
 		return
 	}
-	movie.ID = bson.NewObjectId()
-	if err := dao.Create(movie); err != nil {
+	person.ID = bson.NewObjectId()
+	if err := dao.Create(person); err != nil {
 		respondWithError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
-	respondWithJson(w, http.StatusCreated, movie)
+	respondWithJson(w, http.StatusCreated, person)
 }
 
 func Update(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 	params := mux.Vars(r)
-	var movie Movie
-	if err := json.NewDecoder(r.Body).Decode(&movie); err != nil {
+	var person Person
+	if err := json.NewDecoder(r.Body).Decode(&person); err != nil {
 		respondWithError(w, http.StatusBadRequest, "Invalid request payload")
 		return
 	}
-	if err := dao.Update(params["id"], movie); err != nil {
+	if err := dao.Update(params["id"], person); err != nil {
 		respondWithError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
-	respondWithJson(w, http.StatusOK, map[string]string{"result": movie.Name + " atualizado com sucesso!"})
+	respondWithJson(w, http.StatusOK, map[string]string{"result": person.Name + " atualizado com sucesso!"})
 }
 
 func Delete(w http.ResponseWriter, r *http.Request) {

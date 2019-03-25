@@ -3,7 +3,7 @@ package dao
 import (
 	"log"
 
-	. "github.com/marcelozilio/golang-rest-api/tree/master/model"
+	. "github.com/marcelozilio/golang-rest-api/model"
 	mgo "gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )
@@ -33,14 +33,14 @@ func (m *PersonDAO) GetAll() ([]Person, error) {
 	return persons, err
 }
 
-func (m *PersonDAO) GetByID(id string) (Movie, error) {
+func (m *PersonDAO) GetByID(id string) (Person, error) {
 	var person Person
 	err := db.C(COLLECTION).FindId(bson.ObjectIdHex(id)).One(&person)
 	return person, err
 }
 
 func (m *PersonDAO) Create(person Person) error {
-	err := db.C(COLLECTION).Insert(&movie)
+	err := db.C(COLLECTION).Insert(&person)
 	return err
 }
 
